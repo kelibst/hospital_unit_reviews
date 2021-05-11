@@ -3,7 +3,7 @@ module Api
         class AdministratorsController < ApplicationController
              # GET /admins
         def index
-            @admins = Administrator.all
+            @users = Administrator.all
         end
 
         # GET /admins/{username}

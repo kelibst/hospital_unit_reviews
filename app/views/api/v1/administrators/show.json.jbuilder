@@ -2,6 +2,7 @@ json.id @user.id
 
 json.body do
   json.email @user.email
+  json.role @user.role
 end
 json.confirmation_token @user.confirmation_token unless @user.email_confirmed
 

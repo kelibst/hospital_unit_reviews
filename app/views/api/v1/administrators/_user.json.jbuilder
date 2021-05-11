@@ -1,9 +1,8 @@
 json.id user.id
-json.username user.username
 
 json.body do
   json.email user.email
-  json.age user.age
+  json.role user.role
 end
 
 json.dates do
