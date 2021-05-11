@@ -1,9 +1,7 @@
 json.id @user.id
-json.username @user.username
 
 json.body do
   json.email @user.email
-  json.age @user.age
 end
 json.confirmation_token @user.confirmation_token unless @user.email_confirmed
 

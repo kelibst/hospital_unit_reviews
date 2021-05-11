@@ -6,7 +6,7 @@ class Administrator < ApplicationRecord
   
     validates :email, presence: true, uniqueness: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates :phone, presence: true, length: 10
+    validates :phone, presence: true, length: { maximum: 10}
     validates :password,
               length: { minimum: 3 },
               if: -> { new_record? || !password.nil? }

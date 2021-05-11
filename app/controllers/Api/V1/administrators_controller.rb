@@ -3,7 +3,7 @@ module Api
         class AdministratorsController < ApplicationController
              # GET /admins
         def index
-            @admins = User.all
+            @admins = Administrator.all
         end
 
         # GET /admins/{username}
@@ -11,7 +11,7 @@ module Api
 
         # POST /admins
         def create
-            @user = User.new(user_params)
+            @user = Administrator.new(user_params)
             if @user.save
             render :show, status: :created
             else
@@ -43,7 +43,7 @@ module Api
 
         def user_params
             params.permit(
-              :name, :role, :email, :password, :password_confirmation
+              :name, :role, :email, :password, :password_confirmation, :phone
             )
           end
         end
