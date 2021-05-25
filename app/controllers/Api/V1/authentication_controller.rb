@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationController < ApplicationController
       def login
-        @user = User.find_by_email(params[:email])
+        @user = Administrator.find_by_email(params[:email])
         if @user&.authenticate(params[:password])
           @token = JsonWebToken.encode(user_id: @user.id)
           @time = Time.now + 24.hours.to_i
@@ -20,7 +20,7 @@ module Api
 
       # confirm email
       def confirm
-        @user = User.find_by_confirmation_token(params[:id])
+        @user = Administrator.find_by_confirmation_token(params[:id])
 
         if @user.present? && @user.confirmation_token_valid?
           @user.mark_as_confirmed!
