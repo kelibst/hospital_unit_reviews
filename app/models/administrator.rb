@@ -1,4 +1,5 @@
 class Administrator < ApplicationRecord
+  belongs_to :hospitals
     has_secure_password
 
     before_save :downcase_email
