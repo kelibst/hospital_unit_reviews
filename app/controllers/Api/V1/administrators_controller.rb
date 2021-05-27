@@ -42,8 +42,8 @@ module Api
         end
 
         def user_params
-            params.permit(
-              :name, :role, :email, :password, :password_confirmation, :phone
+            params.require(:administrator).permit(
+              :name, :role, :email, :password, :password_confirmation, :phone, :hospital_id
             )
           end
         end
