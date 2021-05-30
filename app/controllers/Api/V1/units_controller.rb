@@ -1,6 +1,7 @@
 module Api
   module V1
     class UnitsController < ApplicationController
+      before_action :authorize_request
       before_action :set_unit, only: %i[ show update destroy ]
 
       # GET /units
@@ -20,7 +21,7 @@ module Api
         @unit = Unit.new(unit_params)
 
         if @unit.save
-          render :show, status: :created, location: @unit
+          render :show, status: :created
         else
           render json: @unit.errors, status: :unprocessable_entity
         end
@@ -50,7 +51,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def unit_params
-          params.require(:unit).permit(:name, :unithead)
+          params.require(:unit).permit(:name, :unithead, :administrators_id, :hospitals_id)
         end
     end
   end

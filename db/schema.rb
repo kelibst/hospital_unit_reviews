@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_024627) do
+ActiveRecord::Schema.define(version: 2021_05_30_203630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,13 @@ ActiveRecord::Schema.define(version: 2021_05_27_024627) do
     t.string "unithead"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "administrators_id"
+    t.bigint "hospitals_id"
+    t.index ["administrators_id"], name: "index_units_on_administrators_id"
+    t.index ["hospitals_id"], name: "index_units_on_hospitals_id"
   end
 
   add_foreign_key "administrators", "hospitals"
+  add_foreign_key "units", "administrators", column: "administrators_id"
+  add_foreign_key "units", "hospitals", column: "hospitals_id"
 end
