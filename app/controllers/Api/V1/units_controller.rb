@@ -51,7 +51,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def unit_params
-          params.require(:unit).permit(:name, :unithead, :administrators_id, :hospitals_id)
+          params.require(:unit).permit(:name, :unithead, :administrator_id, :hospital_id)
         end
     end
   end

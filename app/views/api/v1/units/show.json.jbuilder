@@ -3,7 +3,7 @@ json.id @unit.id
 json.body do
   json.name @unit.name
   json.unitHead @unit.unithead
-  json.Admin @unit.administrators_id
+  json.Admin @unit.administrator_id
 end
 
 json.dates do
