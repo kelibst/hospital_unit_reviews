@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_203630) do
+ActiveRecord::Schema.define(version: 2021_05_31_173015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,16 +18,16 @@ ActiveRecord::Schema.define(version: 2021_05_30_203630) do
   create_table "administrators", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
-    t.string "role"
+    t.boolean "role"
     t.string "email"
     t.string "phone"
+    t.bigint "hospital_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "email_confirmed", default: false, null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.bigint "hospital_id"
     t.index ["hospital_id"], name: "index_administrators_on_hospital_id"
   end
 
@@ -44,15 +44,15 @@ ActiveRecord::Schema.define(version: 2021_05_30_203630) do
   create_table "units", force: :cascade do |t|
     t.string "name"
     t.string "unithead"
+    t.bigint "administrator_id", null: false
+    t.bigint "hospital_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "administrators_id"
-    t.bigint "hospitals_id"
-    t.index ["administrators_id"], name: "index_units_on_administrators_id"
-    t.index ["hospitals_id"], name: "index_units_on_hospitals_id"
+    t.index ["administrator_id"], name: "index_units_on_administrator_id"
+    t.index ["hospital_id"], name: "index_units_on_hospital_id"
   end
 
   add_foreign_key "administrators", "hospitals"
-  add_foreign_key "units", "administrators", column: "administrators_id"
-  add_foreign_key "units", "hospitals", column: "hospitals_id"
+  add_foreign_key "units", "administrators"
+  add_foreign_key "units", "hospitals"
 end

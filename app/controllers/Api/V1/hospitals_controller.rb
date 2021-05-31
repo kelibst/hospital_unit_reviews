@@ -1,7 +1,7 @@
 module Api
     module V1
         class HospitalsController < ApplicationController  
-            before_action :authorize_request
+            before_action :authorize_request, except: [:create]
             before_action :set_hospital, only: %i[ show update destroy ]
             # GET /hospitals
             # GET /hospitals.json
