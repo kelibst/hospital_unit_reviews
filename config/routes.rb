@@ -8,6 +8,9 @@ Rails.application.routes.draw do
         end
       end  
   post '/auth/login', to: 'authentication#login'
+  put 'password/update', to: 'passwords#update'
+  post 'password/forgot/', to: 'passwords#forgot', constraints: { email: /.*/ }
+  post 'password/reset/', to: 'passwords#reset'
   resources :units
   resources :hospitals
     end

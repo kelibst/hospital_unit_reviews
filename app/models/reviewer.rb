@@ -1,5 +1,5 @@
 class Reviewer < ApplicationRecord
-  belongs_to :hospital
+  belongs_to :hospital, optional: true
 
   before_save :downcase_email
 

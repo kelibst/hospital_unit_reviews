@@ -1,5 +1,5 @@
 class Administrator < ApplicationRecord
-  belongs_to :hospitals
+  belongs_to :hospitals, optional: true
   has_many :units
     has_secure_password
 

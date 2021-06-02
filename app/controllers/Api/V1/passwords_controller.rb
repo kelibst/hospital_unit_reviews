@@ -5,7 +5,7 @@ module Api
       def forgot
         return render json: { error: 'Email not present' } if params[:email].blank? # check if email is present
 
-        user = User.find_by_email(params[:email]) # if present find user by email
+        user = Administrator.find_by_email(params[:email]) # if present find user by email
 
         if user.present?
           user.generate_password_token! # generate pass token
@@ -36,7 +36,7 @@ module Api
 
         return render json: { error: 'Token not present' } if params[:email].blank?
 
-        user = User.find_by(reset_password_token: token)
+        user = Administrator.find_by(reset_password_token: token)
 
         if user.present? && user.password_token_valid?
           if user.reset_password!(params[:password])
