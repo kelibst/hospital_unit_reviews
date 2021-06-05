@@ -1,7 +1,9 @@
 class Reviewer < ApplicationRecord
   belongs_to :hospital, optional: true
+  has_secure_password
 
   before_save :downcase_email
+  before_create :generate_confirmation_instructions
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -17,8 +19,6 @@ class Reviewer < ApplicationRecord
   end
 
   def activecode_valid?
-    (activecode_sent_at + 7.days) > Time.now.utc
+    (activecode_sent_at + 7.days) < Time.now.utc
   end
-
-  
 end

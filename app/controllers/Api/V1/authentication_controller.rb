@@ -7,7 +7,6 @@ module Api
           @token = JsonWebToken.encode(user_id: @user.id)
           @time = Time.now + 24.hours.to_i
           render :login, status: :ok
-
         else
           if @user.present?
             @user.errors.add(:password, "is not valid!")
