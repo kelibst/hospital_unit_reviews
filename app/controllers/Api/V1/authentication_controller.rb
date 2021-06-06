@@ -22,7 +22,7 @@ module Api
         if @reviewer.present?
           @token = JsonWebToken.encode(user_id: @reviewer.id)
           @time = Time.now + 24.hours.to_i
-          render :login, status: :ok
+          render :reviewer, status: :ok
         else
           byebug
         end
