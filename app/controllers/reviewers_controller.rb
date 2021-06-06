@@ -1,6 +1,6 @@
 class ReviewersController < ApplicationController
   before_action :set_reviewer, only: %i[ show update destroy ]
-
+  before_action :authorize_request, only: [:create]
   # GET /reviewers
   # GET /reviewers.json
   def index
@@ -18,6 +18,8 @@ class ReviewersController < ApplicationController
     @reviewer = Reviewer.new(reviewer_params)
 
     if @reviewer.save
+        # SEND UPDATE EMAIL HERE
+        ActiveCodeMailer.send_active_code_email(@reviewer).deliver
       render :show, status: :created, location: @reviewer
     else
       render json: @reviewer.errors, status: :unprocessable_entity

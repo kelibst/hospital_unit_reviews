@@ -17,6 +17,17 @@ module Api
         end
       end
 
+      def reviewer_login
+        @reviewer = Reviewer.find_by_email(params[:email])
+        if @reviewer.present?
+          @token = JsonWebToken.encode(user_id: @reviewer.id)
+          @time = Time.now + 24.hours.to_i
+          render :login, status: :ok
+        else
+          byebug
+        end
+      end
+
       # confirm email
       def confirm
         @user = Administrator.find_by_confirmation_token(params[:id])

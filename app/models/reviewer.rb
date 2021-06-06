@@ -1,13 +1,12 @@
 class Reviewer < ApplicationRecord
   belongs_to :hospital, optional: true
-  has_secure_password
 
   before_save :downcase_email
-  before_create :generate_confirmation_instructions
+  before_create :generate_active_code
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :phone, presence: true, length: { maximum: 10}, uniqueness: true
+  validates :phone, presence: true, length: { maximum: 15}, uniqueness: true
 
   def downcase_email
     self.email = email.delete(' ').downcase

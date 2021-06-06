@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         end
       end  
   post '/auth/login', to: 'authentication#login'
+  post '/auth/reviewer/login', to: 'authentication#reviewer_login'
   put 'password/update', to: 'passwords#update'
   post 'password/forgot/', to: 'passwords#forgot', constraints: { email: /.*/ }
   post 'password/reset/', to: 'passwords#reset'
