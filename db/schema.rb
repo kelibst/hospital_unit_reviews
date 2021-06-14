@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_064207) do
+ActiveRecord::Schema.define(version: 2021_06_14_071324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 2021_06_07_064207) do
     t.bigint "hospital_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.boolean "email_confirmed", default: false, null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
     t.index ["hospital_id"], name: "index_administrators_on_hospital_id"
   end
 
@@ -76,11 +76,6 @@ ActiveRecord::Schema.define(version: 2021_06_07_064207) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reviewer_id"], name: "index_slots_on_reviewer_id"
     t.index ["unit_id"], name: "index_slots_on_unit_id"
-  end
-
-  create_table "unit_to_reviews", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "units", force: :cascade do |t|

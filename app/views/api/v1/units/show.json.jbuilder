@@ -4,6 +4,7 @@ json.body do
   json.name @unit.name
   json.unitHead @unit.unithead
   json.Admin @unit.administrator_id
+  json.score @unit.avg_score
 end
 
 json.dates do
