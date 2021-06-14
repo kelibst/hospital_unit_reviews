@@ -15,12 +15,20 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params)
+    @slots = Slot.where(unit_id: review_params[:unit_id], reviewer_id:  review_params[:reviewer_id])
+    if @slots.empty?
+      render json: {errors: "You do not have a slot to review this unit."}
+      else  
 
-    if @review.save
-      render :show, status: :created, location: @review
-    else
-      render json: @review.errors, status: :unprocessable_entity
+      @review = Review.new(review_params)
+
+      if @review.save
+        @slots.first.destroy
+        render :show, status: :created, location: @review
+      else
+        render json: @review.errors, status: :unprocessable_entity
+      end
+     
     end
   end
 

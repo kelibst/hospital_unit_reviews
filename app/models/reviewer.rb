@@ -1,6 +1,6 @@
 class Reviewer < ApplicationRecord
   belongs_to :hospital, optional: true
-
+  has_many :review
   before_save :downcase_email
   before_create :generate_active_code
 

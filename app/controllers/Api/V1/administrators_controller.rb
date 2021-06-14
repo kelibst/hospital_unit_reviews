@@ -1,6 +1,7 @@
 module Api
     module V1
         class AdministratorsController < ApplicationController
+            before_action :authorize_request, only: [:slot]
              # GET /admins
         def index
             @users = Administrator.all
@@ -20,6 +21,21 @@ module Api
             end
         end
 
+
+        def slot
+            if @current_user.is_a?(Administrator)
+              slot_obj = Slot.new(unit_id: params[:unit_id], reviewer_id: params[:reviewer_id])
+              if slot_obj.save 
+                  render json: {slot: "Slot was successfully added for this reviewer."}
+              else
+                  render json: {errors: slot_obj.errors.full_messages}
+              end
+            else 
+                render json: {errors: "Only Admins are allowed to add reviewers to slot."}
+            end
+          end
+        
+
         # PUT /admins/{username}
         def update
             return if @user.update(user_update_params)
@@ -36,14 +52,20 @@ module Api
         private
 
         def find_user
-            @user = User.find_by_id!(params[:id])
+            @user = Administrator.find_by_id!(params[:id])
         rescue ActiveRecord::RecordNotFound
             render json: { errors: 'User not found' }, status: :not_found
         end
 
         def user_params
             params.require(:administrator).permit(
-              :name, :role, :email, :password, :password_confirmation, :phone, :hospital_id
+              :name, :role, :email, :password, :password_confirmation, :phone, :hospital_id, :unit_id, :reviewer_id
+            )
+          end
+
+          def slot_params
+            parama.permit(
+              :unit_id, :reviewer_id
             )
           end
         end

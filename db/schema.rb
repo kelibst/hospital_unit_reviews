@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_062606) do
+ActiveRecord::Schema.define(version: 2021_06_07_064207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,13 +69,18 @@ ActiveRecord::Schema.define(version: 2021_06_03_062606) do
     t.index ["unit_id"], name: "index_reviews_on_unit_id"
   end
 
-  create_table "unit_t0_reviews", force: :cascade do |t|
+  create_table "slots", force: :cascade do |t|
     t.bigint "unit_id", null: false
     t.bigint "reviewer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["reviewer_id"], name: "index_unit_t0_reviews_on_reviewer_id"
-    t.index ["unit_id"], name: "index_unit_t0_reviews_on_unit_id"
+    t.index ["reviewer_id"], name: "index_slots_on_reviewer_id"
+    t.index ["unit_id"], name: "index_slots_on_unit_id"
+  end
+
+  create_table "unit_to_reviews", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "units", force: :cascade do |t|
@@ -93,8 +98,8 @@ ActiveRecord::Schema.define(version: 2021_06_03_062606) do
   add_foreign_key "reviewers", "hospitals"
   add_foreign_key "reviews", "reviewers"
   add_foreign_key "reviews", "units"
-  add_foreign_key "unit_t0_reviews", "reviewers"
-  add_foreign_key "unit_t0_reviews", "units"
+  add_foreign_key "slots", "reviewers"
+  add_foreign_key "slots", "units"
   add_foreign_key "units", "administrators"
   add_foreign_key "units", "hospitals"
 end
