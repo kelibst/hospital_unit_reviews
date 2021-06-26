@@ -1,6 +1,6 @@
 class Administrator < ApplicationRecord
   belongs_to :hospitals, optional: true
-  has_many :units
+  has_many :units, dependent: :destroy
     has_secure_password
 
     before_save :downcase_email
