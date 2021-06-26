@@ -8,7 +8,7 @@ class Administrator < ApplicationRecord
   
     validates :email, presence: true, uniqueness: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates :phone, presence: true, length: { maximum: 10}
+    validates :phone, presence: true, length: { maximum: 14}
     validates :password,
               length: { minimum: 3 },
               if: -> { new_record? || !password.nil? }
@@ -48,6 +48,8 @@ class Administrator < ApplicationRecord
       self.password = password
       save!
     end
+
+    scope :ordered_by_most_recent, -> { order(created_at: :desc) }
   
     private
   

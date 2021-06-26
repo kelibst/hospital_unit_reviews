@@ -2,6 +2,7 @@ module Api
     module V1
         class AdministratorsController < ApplicationController
             before_action :authorize_request, only: [:slot]
+            before_action :find_user, only: [:show, :update, :destroy]
              # GET /admins
         def index
             @users = Administrator.all
@@ -52,7 +53,9 @@ module Api
         private
 
         def find_user
-            @user = Administrator.find_by_id!(params[:id])
+            byebug
+            @user = Administrator.find_by_phone!(params[:id])
+            
         rescue ActiveRecord::RecordNotFound
             render json: { errors: 'User not found' }, status: :not_found
         end
