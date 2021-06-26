@@ -53,7 +53,6 @@ module Api
         private
 
         def find_user
-            byebug
             @user = Administrator.find_by_phone!(params[:id])
             
         rescue ActiveRecord::RecordNotFound
