@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationController < ApplicationController
       def login
-        @user = Administrator.find_by_email(params[:email])
+        @user = Administrator.find_by_email(params[:email].downcase)
         if @user&.authenticate(params[:password])
           @token = JsonWebToken.encode(user_id: @user.id)
           @time = Time.now + 24.hours.to_i
@@ -18,7 +18,7 @@ module Api
       end
 
       def reviewer_login
-        @reviewer = Reviewer.find_by_email(params[:email])
+        @reviewer = Reviewer.find_by_email(params[:email].downcase)
         if @reviewer.present?
           @token = JsonWebToken.encode(user_id: @reviewer.id)
           @time = Time.now + 24.hours.to_i
