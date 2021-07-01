@@ -1,7 +1,8 @@
 module Api
     module V1
         class AdministratorsController < ApplicationController
-            before_action :authorize_reviewer, only: [:slot]
+            before_action :authorize_request, only: [:slot]
+            before_action :authorize_reviewer, only: [:slot_index]
             before_action :find_user, only: [:show, :update, :destroy]
              # GET /admins
         def index
@@ -34,7 +35,11 @@ module Api
             else 
                 render json: {error: "Only Admins are allowed to add reviewers to slot."}
             end
-          end
+        end
+
+        def slot_index
+            render json: {slots: @current_user.slots}
+        end
         
 
         # PUT /admins/{username}

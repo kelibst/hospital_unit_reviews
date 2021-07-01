@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end  
   post '/auth/login', to: 'authentication#login'
   post '/addslot', to: 'administrators#slot'
+  get '/getslots', to: 'administrators#slot_index'
   post '/auth/reviewer/login', to: 'authentication#reviewer_login'
   put 'password/update', to: 'passwords#update'
   post 'password/forgot/', to: 'passwords#forgot', constraints: { email: /.*/ }
