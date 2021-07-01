@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
   def create
     @slots = Slot.where(unit_id: review_params[:unit_id], reviewer_id:  review_params[:reviewer_id])
     if @slots.empty?
-      render json: {errors: "You do not have a slot to review this unit."}
+      render json: {error: "You do not have a slot to review this unit."}
       else  
 
       @review = Review.new(review_params)
