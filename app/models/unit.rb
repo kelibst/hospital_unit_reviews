@@ -3,6 +3,8 @@ class Unit < ApplicationRecord
     
     belongs_to :administrators, optional: true
     has_many :reviews
+    has_many :slots
+    has_many :reviewers, :through => :slots
     validates :name, presence: true, uniqueness: true, length: { in: 3..200 }
     
     def avg_score

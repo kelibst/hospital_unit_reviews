@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show update destroy ]
-  before_action :authorize_request
+  before_action :authorize_reviewer
   # GET /reviews
   # GET /reviews.json
   def index

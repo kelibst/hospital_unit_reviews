@@ -2,6 +2,7 @@ json.id @user.id
 
 json.body do
   json.email @user.email
+  json.type @user.isAdmin
   json.name @user.name
   json.role @user.role
   json.username @user.phone

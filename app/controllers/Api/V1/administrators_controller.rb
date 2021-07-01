@@ -1,7 +1,7 @@
 module Api
     module V1
         class AdministratorsController < ApplicationController
-            before_action :authorize_request, only: [:slot]
+            before_action :authorize_reviewer, only: [:slot]
             before_action :find_user, only: [:show, :update, :destroy]
              # GET /admins
         def index
@@ -29,10 +29,10 @@ module Api
               if slot_obj.save 
                   render json: {slot: "Slot was successfully added for this reviewer."}
               else
-                  render json: {errors: slot_obj.errors.full_messages}
+                  render json: {error: slot_obj.errors.full_messages}
               end
             else 
-                render json: {errors: "Only Admins are allowed to add reviewers to slot."}
+                render json: {error: "Only Admins are allowed to add reviewers to slot."}
             end
           end
         
@@ -41,7 +41,7 @@ module Api
         def update
             return if @user.update(user_update_params)
 
-            render json: { errors: @user.errors.full_messages },
+            render json: { error: @user.errors.full_messages },
                 status: :unprocessable_entity
         end
 
@@ -56,7 +56,7 @@ module Api
             @user = Administrator.find_by_phone!(params[:id])
             
         rescue ActiveRecord::RecordNotFound
-            render json: { errors: 'User not found' }, status: :not_found
+            render json: { error: 'User not found' }, status: :not_found
         end
 
         def user_params

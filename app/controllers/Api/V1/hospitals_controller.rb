@@ -17,13 +17,17 @@ module Api
             # POST /hosptials
             # POST /hosptials.json
             def create
-                @hospital = Hospital.new(hospital_params)
+                unless Hospital.first 
+                     @hospital = Hospital.new(hospital_params)
 
                 if @hospital.save
                     render :show, status: :created, location: @unit
                 else
                     render json: @hospital.errors, status: :unprocessable_entity
                 end
+            else 
+                render json: { error: {"AccountExist": "Only one Hospital is acceptable per installation"} }, status: :unprocessable_entity
+            end
             end
 
             # PATCH/PUT /hosptials/1

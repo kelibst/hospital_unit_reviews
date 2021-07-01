@@ -24,7 +24,7 @@ module Api
           @time = Time.now + 24.hours.to_i
           render :reviewer, status: :ok
         else
-          render json: {errors: "Sorry we don't have that email"}
+          render json: {error: "Sorry we don't have that email"}
         end
       end
 
