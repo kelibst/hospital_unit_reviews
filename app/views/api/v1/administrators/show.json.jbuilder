@@ -2,10 +2,10 @@ json.id @user.id
 
 json.body do
   json.email @user.email
-  json.type @user.isAdmin
+  json.type "Admin"
   json.name @user.name
   json.role @user.role
-  json.username @user.phone
+  json.username @user.username
 end
 json.confirmation_token @user.confirmation_token unless @user.email_confirmed
 

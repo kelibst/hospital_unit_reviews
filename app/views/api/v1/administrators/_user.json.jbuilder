@@ -4,6 +4,7 @@ json.body do
   json.email user.email
   json.role user.role
   json.phone user.phone
+  json.username user.username
 end
 
 json.dates do

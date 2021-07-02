@@ -2,6 +2,7 @@ json.id @hospital.id
 
 json.body do
   json.name @hospital.name
+  json.username @hospital.username
   json.start @hospital.start_date
   json.country @hospital.country
   json.region @hospital.region

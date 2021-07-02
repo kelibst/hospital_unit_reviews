@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_030107) do
+ActiveRecord::Schema.define(version: 2021_07_02_032226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_030107) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.boolean "isAdmin", default: true, null: false
+    t.string "username", null: false
     t.index ["hospital_id"], name: "index_administrators_on_hospital_id"
   end
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_030107) do
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username", null: false
   end
 
   create_table "reviewers", force: :cascade do |t|
@@ -55,6 +56,8 @@ ActiveRecord::Schema.define(version: 2021_07_01_030107) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "active", default: false, null: false
     t.datetime "activecode_sent_at"
+    t.string "sex", null: false
+    t.string "username", null: false
     t.index ["hospital_id"], name: "index_reviewers_on_hospital_id"
   end
 
@@ -66,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_030107) do
     t.bigint "reviewer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "reviewname", null: false
     t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
     t.index ["unit_id"], name: "index_reviews_on_unit_id"
   end
@@ -86,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_030107) do
     t.bigint "hospital_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "unitname", null: false
     t.index ["administrator_id"], name: "index_units_on_administrator_id"
     t.index ["hospital_id"], name: "index_units_on_hospital_id"
   end

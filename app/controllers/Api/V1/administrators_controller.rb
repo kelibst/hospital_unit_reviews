@@ -58,7 +58,7 @@ module Api
         private
 
         def find_user
-            @user = Administrator.find_by_phone!(params[:id])
+            @user = Administrator.find_by_username!(params[:id])
             
         rescue ActiveRecord::RecordNotFound
             render json: { error: 'User not found' }, status: :not_found

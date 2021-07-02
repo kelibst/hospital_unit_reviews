@@ -22,7 +22,7 @@ class ReviewersController < ApplicationController
         ActiveCodeMailer.send_active_code_email(@reviewer).deliver
       render :show, status: :created, location: @reviewer
     else
-      render json: @reviewer.errors, status: :unprocessable_entity
+      render json:{error: @reviewer.errors} , status: :unprocessable_entity
     end
   end
 
@@ -32,7 +32,7 @@ class ReviewersController < ApplicationController
     if @reviewer.update(reviewer_params)
       render :show, status: :ok, location: @reviewer
     else
-      render json: @reviewer.errors, status: :unprocessable_entity
+      render json: {error: @reviewer.errors} , status: :unprocessable_entity
     end
   end
 
@@ -50,6 +50,6 @@ class ReviewersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reviewer_params
-      params.require(:reviewer).permit(:name, :address, :email, :phone, :hospital_id, :activecode)
+      params.require(:reviewer).permit(:name, :address, :email, :sex, :phone, :hospital_id, :activecode)
     end
 end

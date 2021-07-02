@@ -8,7 +8,16 @@ class Reviewer < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, presence: true, length: { maximum: 15}, uniqueness: true
+  validates :name, presence: true, uniqueness: true
+  validates :sex, presence: true, inclusion: { in: %w(male female),
+    message: "%{value} is not a valid gender" }
 
+  before_save :to_parametize
+
+
+  def to_parametize
+    self.username = "#{name.parameterize(preserve_case: true)}-#{SecureRandom.alphanumeric(5)}"
+  end
   def downcase_email
     self.email = email.delete(' ').downcase
   end

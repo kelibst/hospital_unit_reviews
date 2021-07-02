@@ -1,18 +1,24 @@
 class Administrator < ApplicationRecord
   belongs_to :hospitals, optional: true
   has_many :units, dependent: :destroy
-    has_secure_password
+  has_secure_password
 
     before_save :downcase_email
     before_create :generate_confirmation_instructions
-  
+    validates :name, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :phone, presence: true, length: { maximum: 14}
+
     validates :password,
               length: { minimum: 3 },
               if: -> { new_record? || !password.nil? }
-  
+    before_save :to_parametize
+
+
+    def to_parametize
+      self.username = "#{name.parameterize(preserve_case: true)}-#{SecureRandom.alphanumeric(5)}"
+    end
     def downcase_email
       self.email = email.delete(' ').downcase
     end

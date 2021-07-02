@@ -6,7 +6,11 @@ class Unit < ApplicationRecord
     has_many :slots
     has_many :reviewers, :through => :slots
     validates :name, presence: true, uniqueness: true, length: { in: 3..200 }
-    
+    before_save :to_parametize
+
+    def to_parametize
+        self.unitname = "#{name.parameterize(preserve_case: true)}-#{SecureRandom.alphanumeric(5)}"
+    end
     def avg_score
         reviews.average(:score)
     end
