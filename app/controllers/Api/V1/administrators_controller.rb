@@ -1,7 +1,7 @@
 module Api
     module V1
         class AdministratorsController < ApplicationController
-            before_action :authorize_request, only: [:slot]
+            before_action :authorize_request, only: [:slot, :show]
             before_action :authorize_reviewer, only: [:slot_index]
             before_action :find_user, only: [:show, :update, :destroy]
              # GET /admins
