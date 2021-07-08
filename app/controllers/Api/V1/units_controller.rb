@@ -23,7 +23,7 @@ module Api
         if @unit.save
           render :show, status: :created
         else
-          render json: @unit.errors, status: :unprocessable_entity
+          render json: {error:  @unit.errors }, status: :unprocessable_entity
         end
       end
 
@@ -33,7 +33,7 @@ module Api
         if @unit.update(unit_params)
           render :show, status: :ok, location: @unit
         else
-          render json: @unit.errors, status: :unprocessable_entity
+          render json:{error:  @unit.errors }, status: :unprocessable_entity
         end
       end
 

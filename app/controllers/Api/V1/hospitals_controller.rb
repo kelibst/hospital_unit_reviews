@@ -23,7 +23,7 @@ module Api
                 if @hospital.save
                     render :show, status: :created, location: @unit
                 else
-                    render json: @hospital.errors, status: :unprocessable_entity
+                    render json: { error: @hospital.errors}, status: :unprocessable_entity
                 end
             else 
                 render json: { error: {"AccountExist": "Only one Hospital is acceptable per installation"} }, status: :unprocessable_entity
@@ -36,7 +36,7 @@ module Api
                 if @hospital.update(hospital_params)
                     render :show, status: :ok, location: @hospital
                 else
-                    render json: @hospital.errors, status: :unprocessable_entity
+                    render json:{ error: @hospital.errors}, status: :unprocessable_entity
                 end
             end
 
