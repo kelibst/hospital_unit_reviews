@@ -4,7 +4,7 @@ class ReviewersController < ApplicationController
   # GET /reviewers
   # GET /reviewers.json
   def index
-    @reviewers = Reviewer.all
+    @reviewers = Reviewer.all.ordered_by_most_recent
   end
 
   # GET /reviewers/1

@@ -6,7 +6,7 @@ module Api
             before_action :find_user, only: [:show, :update, :destroy]
              # GET /admins
         def index
-            @users = Administrator.all
+            @users = Administrator.all.ordered_by_most_recent
         end
 
         # GET /admins/{username}

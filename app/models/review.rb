@@ -14,4 +14,5 @@ class Review < ApplicationRecord
       break paramTo unless Review.exists?(reviewname: paramTo)
     end
   end
+  scope :ordered_by_most_recent, -> { order(created_at: :desc) }
 end

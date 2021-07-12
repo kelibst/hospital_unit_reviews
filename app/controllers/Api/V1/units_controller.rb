@@ -7,7 +7,7 @@ module Api
       # GET /units
       # GET /units.json
       def index
-        @units = Unit.all
+        @units = Unit.all.ordered_by_most_recent
       end
 
       # GET /units/1

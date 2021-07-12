@@ -14,4 +14,5 @@ class Unit < ApplicationRecord
     def avg_score
         reviews.average(:score)
     end
+    scope :ordered_by_most_recent, -> { order(created_at: :desc) }
 end

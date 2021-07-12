@@ -30,4 +30,5 @@ class Reviewer < ApplicationRecord
   def activecode_valid?
     (activecode_sent_at + 7.days) < Time.now.utc
   end
+  scope :ordered_by_most_recent, -> { order(created_at: :desc) }
 end
