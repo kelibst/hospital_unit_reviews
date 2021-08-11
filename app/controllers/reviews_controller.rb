@@ -20,9 +20,7 @@ class ReviewsController < ApplicationController
     if @slots.empty?
       render json: {error: "You do not have a slot to review this unit."}
       else  
-
       @review = Review.new(review_params)
-
       if @review.save
         @slots.first.destroy
         render :show, status: :created, location: @review
