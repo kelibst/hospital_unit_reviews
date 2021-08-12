@@ -26,8 +26,7 @@ class ReviewsController < ApplicationController
         render :show, status: :created, location: @review
       else
         render json: @review.errors, status: :unprocessable_entity
-      end
-     
+      end  
     end
   end
 
