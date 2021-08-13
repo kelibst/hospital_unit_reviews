@@ -46,7 +46,7 @@ class Administrator < ApplicationRecord
     end
   
     def password_token_valid?
-      (reset_password_sent_at + 1.hours) > Time.now.utc
+      (reset_password_sent_at + 24.hours) > Time.now.utc
     end
   
     def reset_password!(password)

@@ -1,5 +1,5 @@
 class ReviewersController < ApplicationController
-  before_action :set_reviewer, only: %i[ show update destroy ]
+  before_action :set_reviewer, only: %i[ show update destroy, user_slot ]
   before_action :authorize_request, only: [:create]
   # GET /reviewers
   # GET /reviewers.json
@@ -24,6 +24,10 @@ class ReviewersController < ApplicationController
     else
       render json:{error: @reviewer.errors} , status: :unprocessable_entity
     end
+  end
+
+  def user_slot
+    render json: {slots: @reviewer.slots}
   end
 
   # PATCH/PUT /reviewers/1

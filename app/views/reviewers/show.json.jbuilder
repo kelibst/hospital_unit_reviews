@@ -7,7 +7,8 @@ json.body do
   json.sex @reviewer.sex
   json.phone @reviewer.phone
 end
-json.reviewer_slots @reviewer.units
+json.reviewer_slots @reviewer.slots.length
+json.reviews @reviewer.reviews.length
 json.dates do
   json.created_at @reviewer.created_at
   json.updated_at @reviewer.updated_at

@@ -3,7 +3,7 @@ module Api
     class UnitsController < ApplicationController
       before_action :authorize_request, except: %i[ index ]
       before_action :set_unit, only: %i[ show update destroy ]
-      before_action :authorize_reviewer, only: %i[user_units]
+      before_action :authorize_reviewer, only: %i[reviewing]
       # GET /units
       # GET /units.json
       def index
@@ -16,7 +16,7 @@ module Api
       end
 
       def reviewing
-        @slot_units = Unit.all.where(reviewer_id: params[:id])
+        render json: {reviewer_units_to_review: @current_user.units}
       end
 
       # POST /units

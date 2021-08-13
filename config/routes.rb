@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       end  
   post '/auth/login', to: 'authentication#login'
   post '/addslot', to: 'administrators#slot'
-  get '/getslots', to: 'administrators#slot_index'
+  get '/admin/units/reviewing/:id', to: 'administrators#reviewing'
+  get '/admin/getslots/:id', to: 'administrators#user_slot'
   get 'units/reviewing/:id', to: 'units#reviewing'
   post '/auth/reviewer/login', to: 'authentication#reviewer_login'
   put 'password/update', to: 'passwords#update'
@@ -20,6 +21,6 @@ Rails.application.routes.draw do
   resources :hospitals
     end
   end
-
+ get '/getslots/:id', to: 'reviewers#user_slot'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

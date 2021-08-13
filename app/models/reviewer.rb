@@ -1,6 +1,7 @@
 class Reviewer < ApplicationRecord
   belongs_to :hospital, optional: true
   has_many :slots, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many :units, :through => :slots
   before_save :downcase_email
   before_create :generate_active_code

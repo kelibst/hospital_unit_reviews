@@ -1,9 +1,10 @@
 module Api
     module V1
         class AdministratorsController < ApplicationController
-            before_action :authorize_request, only: [:slot, :show]
-            before_action :authorize_reviewer, only: [:slot_index]
+            before_action :authorize_request, only: [:slot, :show, :reviewing, :user_slot]
             before_action :find_user, only: [:show, :update, :destroy]
+            before_action :find_reviewer, only: [:reviewing, :user_slot]
+
              # GET /admins
         def index
             @users = Administrator.all.ordered_by_most_recent
@@ -23,6 +24,15 @@ module Api
             end
         end
 
+        #get the units a specific reviewer can review
+        def reviewing
+            render json: {reviewer_units_to_review: @reviewer.units}
+        end
+
+        #get the slots a specific reviewer can review
+        def user_slot
+            render json: {slots: @reviewer.slots}
+        end
 
         def slot
             if @current_user.is_a?(Administrator)
@@ -37,9 +47,6 @@ module Api
             end
         end
 
-        def slot_index
-            render json: {slots: @current_user.slots}
-        end
         
 
         # PUT /admins/{username}
@@ -59,6 +66,13 @@ module Api
 
         def find_user
             @user = Administrator.find_by_username!(params[:id])
+            
+        rescue ActiveRecord::RecordNotFound
+            render json: { error: 'User not found' }, status: :not_found
+        end
+
+        def find_reviewer
+            @reviewer = Reviewer.find_by_username!(params[:id])
             
         rescue ActiveRecord::RecordNotFound
             render json: { error: 'User not found' }, status: :not_found
