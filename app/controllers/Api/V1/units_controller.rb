@@ -16,7 +16,7 @@ module Api
       end
 
       def reviewing
-        render json: {reviewer_units_to_review: @current_user.units}
+        @units = @current_user.units
       end
 
       # POST /units

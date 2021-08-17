@@ -1,1 +1,1 @@
-json.reviewing @slot_units
+json.partial! partial: 'unit', collection: @units, as: :unit
