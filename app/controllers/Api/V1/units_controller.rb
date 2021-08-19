@@ -2,7 +2,7 @@ module Api
   module V1
     class UnitsController < ApplicationController
       before_action :authorize_request, except: %i[ index ]
-      before_action :set_unit, only: %i[ show update destroy ]
+      before_action :set_unit, only: %i[ show update destroy unitrevs]
       before_action :authorize_reviewer, only: %i[reviewing]
       # GET /units
       # GET /units.json
@@ -39,6 +39,10 @@ module Api
         else
           render json:{error:  @unit.errors }, status: :unprocessable_entity
         end
+      end
+
+      def unitrevs
+        @unit_reviews = @unit.reviews
       end
 
       # DELETE /units/1

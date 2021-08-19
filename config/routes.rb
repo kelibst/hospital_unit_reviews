@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/addslot', to: 'administrators#slot'
   get '/admin/units/reviewing/:id', to: 'administrators#reviewing'
   get '/admin/getslots/:id', to: 'administrators#user_slot'
+  get '/units-reviews/:id', to: 'units#unitrevs'
   get 'units/reviewing/:id', to: 'units#reviewing'
   post '/auth/reviewer/login', to: 'authentication#reviewer_login'
   put 'password/update', to: 'passwords#update'
