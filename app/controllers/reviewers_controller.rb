@@ -1,6 +1,7 @@
 class ReviewersController < ApplicationController
   before_action :set_reviewer, only: %i[ show update destroy, user_slot ]
   before_action :authorize_request, only: [:create]
+  # before_action :authorize_reviewer, only: %i[show]
   # GET /reviewers
   # GET /reviewers.json
   def index
