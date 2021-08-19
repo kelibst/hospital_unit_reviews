@@ -3,7 +3,7 @@ json.id @review.id
 json.body do
   json.title @review.title
   json.description @review.description
-  json.score   review.score
+  json.score   @review.score
   json.reviewer_id @review.reviewer_id
 end
 
