@@ -6,6 +6,7 @@ json.body do
   json.unit_username @unit.unitname
   json.Admin @unit.administrator_id
   json.score @unit.avg_score
+  json.reviews unit.reviews.length
 end
 
 json.dates do
