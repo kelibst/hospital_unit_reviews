@@ -1,7 +1,7 @@
 module Api
   module V1
     class UnitsController < ApplicationController
-      before_action :authorize_request, except: %i[ index, show ]
+      before_action :authorize_request, except: %i[ index show ]
       before_action :set_unit, only: %i[ show update destroy unitrevs]
       before_action :authorize_reviewer, only: %i[reviewing]
       # GET /units
